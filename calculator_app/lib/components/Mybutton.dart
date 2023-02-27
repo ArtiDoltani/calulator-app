@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 class MyButton extends StatelessWidget {
   final String titile;
@@ -22,7 +23,7 @@ class MyButton extends StatelessWidget {
            color: containercolor
             ),
          child:  Center(
-              child: Text(titile,style: TextStyle(fontSize: 20,color: Colors.white),
+              child: Text(titile,style:const TextStyle(fontSize: 20,color: Colors.white),
               ),
             )
             

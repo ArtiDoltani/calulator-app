@@ -1,5 +1,7 @@
 import 'package:calculator_app/components/Mybutton.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -89,7 +91,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     
                   });
                   }),
-                   MyButton(titile: 'x',containercolor:const Color(0xffffa00a),onpress:(){}),
+                   MyButton(titile: 'x',containercolor:const Color(0xffffa00a),
+                   onpress:(){
+                    userinput+='x';
+                  setState(() {
+                    
+                  });
+                   }),
                       ],),
                       
              // row 3
@@ -166,13 +174,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                  }),
                   MyButton(titile: 'DEL',onpress:(){
-                    userinput+='7';
+                  userinput=userinput.substring(0,userinput.length-1);
                   setState(() {
                     
                   });
                   }),
                    MyButton(titile: '=',containercolor:const Color(0xffffa00a),
-                   onpress: (){},),
+                   onpress: (){
+                     equalpress();
+                   },),
                       ],),
             
                 ],
@@ -184,5 +194,15 @@ class _HomeScreenState extends State<HomeScreen> {
      ),
    );
     
+  }
+                //creating a function for calculations
+  void equalpress(){
+   // String finaluserinput=userinput.
+    Parser p= Parser();
+    Expression expression= p.parse(userinput);
+    ContextModel contextModel=ContextModel();
+    double eval=expression.evaluate(EvaluationType.REAL, contextModel);
+    result=eval.toString();
+   
   }
 }
