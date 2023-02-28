@@ -16,22 +16,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
    return SafeArea(
      child: Scaffold(
-      appBar: AppBar(leading: Icon(Icons.calculate_rounded),
+      appBar: AppBar(leading:const Icon(Icons.calculate_rounded),
       backgroundColor:const Color(0xffffa00a),
         title:const  Text('Calculator App'),),
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
+           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
               //Expanded widget 1
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical:20),
                 child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+             
                   children: [
-                  Text(userinput.toString(),style: TextStyle(fontSize: 20,color: Colors.white,)),
-                  Text(result.toString(),style: TextStyle(fontSize: 20,color: Colors.white,))
+                  Text(userinput.toString(),style:const TextStyle(fontSize: 30,color: Colors.white,)),
+               const  SizedBox(height: 20),
+                  Text(result.toString(),style:const TextStyle(fontSize: 30,color: Colors.white,))
                 ],),
               ),
             ),
@@ -182,6 +186,9 @@ class _HomeScreenState extends State<HomeScreen> {
                    MyButton(titile: '=',containercolor:const Color(0xffffa00a),
                    onpress: (){
                      equalpress();
+                     setState(() {
+                       
+                     });
                    },),
                       ],),
             
@@ -197,9 +204,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
                 //creating a function for calculations
   void equalpress(){
-   // String finaluserinput=userinput.
+   String finaluserinput=userinput.replaceAll('x', '*');
     Parser p= Parser();
-    Expression expression= p.parse(userinput);
+    Expression expression= p.parse(finaluserinput);
     ContextModel contextModel=ContextModel();
     double eval=expression.evaluate(EvaluationType.REAL, contextModel);
     result=eval.toString();
